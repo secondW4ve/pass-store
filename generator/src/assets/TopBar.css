@@ -1,0 +1,15 @@
+.topbar-container {
+  padding: 1rem;
+  background-color: #0B0831;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li.nav-item {
+  list-style-type: none;
+}

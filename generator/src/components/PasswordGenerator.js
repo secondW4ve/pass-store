@@ -5,6 +5,8 @@ import {LOWERCASE_CHAR_CODES,
   SYMBOL_CHAR_CODES,
 } 
 from '../shared/CharactersCodesArrays';
+import './PasswordGenerator.css';
+import copy from '../assets/copy_img.png';
 
 
 function PasswordGenerator (props) {
@@ -13,6 +15,7 @@ function PasswordGenerator (props) {
   const [includeNumbers, setIncludeNumbers] = useState(false);
   const [includeSymbols, setIncludeSymbols] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState('password');
+  const [passwordClass, setPasswordClass] = useState("password-placeholder");
 
   const onRangeChange = (event) => {
     setNumberOfCharacters(event.target.value);
@@ -30,7 +33,7 @@ function PasswordGenerator (props) {
       charCodes = charCodes.concat(SYMBOL_CHAR_CODES);
     }
     const passwordCharacters = [];
-    for(let i = 0; i <= numberOfCharacters; i++){
+    for(let i = 0; i < numberOfCharacters; i++){
       const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)];
       passwordCharacters.push(String.fromCharCode(characterCode));
     }
@@ -39,71 +42,76 @@ function PasswordGenerator (props) {
   }
 
   return (
-    <div className="generator-page">
-      <div className = "generator-container">
-        <h1 className = "title">Password generator</h1>
-        <h3 id = "passwordDisplay" class = "password-display">{generatedPassword}</h3>
-        <div className = "form">
-          <p>Number of characters</p>
-          <div>
-            <input 
-              type = "range" 
-              min="1" 
-              max="30" 
-              value={numberOfCharacters}
-              onChange = {onRangeChange}
-              id="characterAmountRange"
-            />
-            <input 
-              type = "number"
-              min="1" 
-              max="50" 
-              value={numberOfCharacters}
-              onChange = {onRangeChange}
-              id="characterAmountNumber"  
-              class = "number-input"
-            />
-          </div>
-          <p for="includeUppercase">Include uppercase</p>
+    <div className = "generator-container">
+      <h2 className = "generator-title">Generate password!</h2>
+      <h4 className = "password-display">
+        <p className = {passwordClass}>{generatedPassword}</p>
+        <img 
+          src = {copy} 
+          width = "5"
+          alt = "cpy"
+          className = "copy-img"
+        />
+      </h4>
+      <div className = "form">
+        <p>Number of characters</p>
+        <div className = "character-amount-container">
           <input 
-            type = "checkbox" 
-            id = "includeUppercase"
-            value = {includeUppercase}
-            onChange = {() => {
-              const prevValue = includeUppercase;
-              setIncludeUppercase(!prevValue);
-            }}  
+            type = "range" 
+            min="1" 
+            max="30" 
+            value={numberOfCharacters}
+            onChange = {onRangeChange}
           />
-
-          <p for="includeNumbers">Include numbers</p>
           <input 
-            type = "checkbox" 
-            id = "includeNumbers"
-            value = {includeNumbers}
-            onChange = {() => {
-              const prevValue = includeNumbers;
-              setIncludeNumbers(!prevValue);
-            }}  
+            type = "number"
+            min="1" 
+            max="50" 
+            value={numberOfCharacters}
+            onChange = {onRangeChange}
+            id="characterAmountNumber"  
+            className = "number-input"
           />
-
-          <p for="includeSymbols">Include symbols</p>
-          <input 
-            type = "checkbox" 
-            id = "includeSymbols"
-            value = {includeSymbols}
-            onChange = {() => {
-              const prevValue = includeSymbols;
-              setIncludeSymbols(!prevValue);
-            }}
-          />
-
-          <button 
-            class = "btn" 
-            onClick = {generatePassword}
-          >
-            Generate password
-          </button>
         </div>
+        <p for="includeUppercase">Include uppercase</p>
+        <input 
+          type = "checkbox" 
+          id = "includeUppercase"
+          value = {includeUppercase}
+          onChange = {() => {
+            const prevValue = includeUppercase;
+            setIncludeUppercase(!prevValue);
+          }}  
+        />
+
+        <p for="includeNumbers">Include numbers</p>
+        <input 
+          type = "checkbox" 
+          id = "includeNumbers"
+          value = {includeNumbers}
+          onChange = {() => {
+            const prevValue = includeNumbers;
+            setIncludeNumbers(!prevValue);
+          }}  
+        />
+
+        <p for="includeSymbols">Include symbols</p>
+        <input 
+          type = "checkbox" 
+          id = "includeSymbols"
+          value = {includeSymbols}
+          onChange = {() => {
+            const prevValue = includeSymbols;
+            setIncludeSymbols(!prevValue);
+          }}
+        />
+
+        <button 
+          class = "btn" 
+          onClick = {generatePassword}
+        >
+          Generate password
+        </button>
       </div>
     </div>
   )

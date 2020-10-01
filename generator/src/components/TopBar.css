@@ -1,0 +1,44 @@
+.topbar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #080607;
+  height: 10%;
+}
+
+.logo {
+  flex-grow: 1;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #efefef;
+}
+
+.title {
+  font-family: "Raleway Bold";
+  color: #efefef;
+}
+
+li.nav-item {
+  list-style-type: none;
+  display: inline;
+  margin-left: 1rem;
+  font-family: "Raleway Light";
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.title-navs {
+  flex-grow: 11;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

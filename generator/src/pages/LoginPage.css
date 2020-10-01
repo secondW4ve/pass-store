@@ -1,0 +1,38 @@
+.login-container {
+  height: 100%;
+  display: grid;
+}
+
+.login-input-form {
+  margin: auto;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.input-field {
+  font-family: "Raleway Light";
+  font-size: 15px;
+  color: #666666;
+  width: 50%;
+  background: #efefef;
+  height: 40px;
+  border: 1px solid #060708;
+  border-radius: 25px;
+  padding: 0 20px 0 20px;
+}
+
+.login-btn {
+  margin-top: 2rem;
+  font-family: "Raleway Bold";
+  font-size: 15px;
+  color: #efefef;
+  text-transform: uppercase;
+  width: 50%;
+  height: 50px;
+  border-radius: 25px;
+  background: #060708;
+}

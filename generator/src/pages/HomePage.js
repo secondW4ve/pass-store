@@ -1,10 +1,13 @@
 import React from 'react';
 
+import './HomePage.css';
+import PasswordGenerator from '../components/PasswordGenerator';
+
 function HomePage () {
 
   return(
-    <div>
-      
+    <div className = "homepage-container">
+      <PasswordGenerator/>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/key_logo.png';
-import '../assets/TopBar.css';
+import './TopBar.css';
 
 function TopBar () {
 
@@ -10,20 +10,29 @@ function TopBar () {
     <div className = "topbar-container">
       <nav className = "navigation">
         <Link to = "/" className = "logo">
-          <img src = { logo } width = {75}></img>
+          <img src = { logo } width = {50}></img>
         </Link>
-        <ul className = "nav-buttons">
-          <li className = "nav-item">
-            <Link to = "/login">
-              Login
-            </Link>
-          </li>
-          <li className = "nav-item">
-            <Link to = "/signup">
-              Sign up
-            </Link>
-          </li>  
-        </ul>
+        <div className = "title-navs">
+          <h1 className = "title">Your private password storage!</h1>
+          <ul className = "nav-buttons">
+            <li className = "nav-item">
+              <Link 
+                to = "/login"
+                className = "nav-link"
+              >
+                Login
+              </Link>
+            </li>
+            <li className = "nav-item">
+              <Link 
+                to = "/signup"
+                className = "nav-link"
+              >
+                Sign up
+              </Link>
+            </li>  
+          </ul>
+        </div>
       </nav>
     </div>
   )

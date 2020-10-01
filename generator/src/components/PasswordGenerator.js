@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
+import {Animated} from "react-animated-css";
+
 import {LOWERCASE_CHAR_CODES, 
   UPPERCASE_CHAR_CODES,
   NUMBER_CHAR_CODES,
@@ -16,12 +18,16 @@ function PasswordGenerator (props) {
   const [includeSymbols, setIncludeSymbols] = useState(false);
   const [generatedPassword, setGeneratedPassword] = useState('password');
   const [passwordClass, setPasswordClass] = useState("password-placeholder");
+  const [popUpVisible, setPopUpVisible] = useState(false);
+
+  const refPasswordField = useRef(null);
 
   const onRangeChange = (event) => {
     setNumberOfCharacters(event.target.value);
   }
 
   const generatePassword = () => {
+    setPasswordClass("generated-password");
     let charCodes = LOWERCASE_CHAR_CODES;
     if (includeUppercase){
       charCodes = charCodes.concat(UPPERCASE_CHAR_CODES);
@@ -41,18 +47,31 @@ function PasswordGenerator (props) {
     setGeneratedPassword(passwordCharacters.join(''));
   }
 
+  const copyPasswordToClipboard = (e) => {
+    navigator.clipboard.writeText(generatedPassword);
+    setPopUpVisible(true);
+    setTimeout(() => {
+      setPopUpVisible(false);
+    }, 1500);
+  }
+
   return (
     <div className = "generator-container">
       <h2 className = "generator-title">Generate password!</h2>
-      <h4 className = "password-display">
-        <p className = {passwordClass}>{generatedPassword}</p>
-        <img 
-          src = {copy} 
-          width = "5"
-          alt = "cpy"
-          className = "copy-img"
-        />
-      </h4>
+      <div className = "password-display" onClick = {copyPasswordToClipboard}>
+          <p className = {passwordClass}>{generatedPassword}</p>
+      </div>
+      <Animated 
+          animationIn="zoomIn" 
+          animationOut="zoomOut" 
+          animationInDuration={600} 
+          animationOutDuration={600} 
+          animateOnMount = {false}
+          isVisible={popUpVisible}
+          className = "message"
+        >
+          Password was copied!
+        </Animated>
       <div className = "form">
         <p>Number of characters</p>
         <div className = "character-amount-container">
@@ -73,7 +92,7 @@ function PasswordGenerator (props) {
             className = "number-input"
           />
         </div>
-        <p for="includeUppercase">Include uppercase</p>
+        <p>Include uppercase</p>
         <input 
           type = "checkbox" 
           id = "includeUppercase"
@@ -84,7 +103,7 @@ function PasswordGenerator (props) {
           }}  
         />
 
-        <p for="includeNumbers">Include numbers</p>
+        <p>Include numbers</p>
         <input 
           type = "checkbox" 
           id = "includeNumbers"
@@ -107,7 +126,7 @@ function PasswordGenerator (props) {
         />
 
         <button 
-          class = "btn" 
+          className = "btn" 
           onClick = {generatePassword}
         >
           Generate password

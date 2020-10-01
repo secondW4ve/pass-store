@@ -9,6 +9,7 @@
 
 .logo {
   flex-grow: 1;
+  text-align: center;
 }
 
 .navigation {
@@ -22,11 +23,13 @@
 .title {
   font-family: "Raleway Bold";
   color: #efefef;
+  cursor: default;
 }
 
 li.nav-item {
   list-style-type: none;
   display: inline;
+  font-size: 18px;
   margin-left: 1rem;
   font-family: "Raleway Light";
 }

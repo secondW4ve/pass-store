@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import Input from '../components/Input';
 import './LoginPage.css';
 
 function LoginPage () {
@@ -7,11 +8,11 @@ function LoginPage () {
   return(
     <div className = "login-container">
       <div className = "login-input-form">
-        <input 
+        <Input 
           placeholder = "username"
           className = "input-field"
         />
-        <input 
+        <Input 
           type = "password" 
           placeholder = "password"
           className = "input-field"

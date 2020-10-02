@@ -1,0 +1,24 @@
+
+.button-with-spinner-container {
+  display: grid;
+  grid-template-rows: 50% auto;
+  width: 300px;
+  height: 100%;
+  justify-items: center;
+}
+
+.button-with-spinner {
+  font-family: "Raleway Bold";
+  font-size: 15px;
+  color: #efefef;
+  text-transform: uppercase;
+  width: 30%;
+  height: 40px;
+  border-radius: 25px;
+  background: #060708;
+  cursor: pointer;
+}
+
+.spinner-box {
+  height: 40px;
+}

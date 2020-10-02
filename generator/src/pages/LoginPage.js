@@ -1,27 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Input from '../components/Input';
+import ButtonWithSpinner from "../components/ButtonWithSpinner";
 import './LoginPage.css';
 
 function LoginPage () {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [pendingApiCall, setPendingApiCall] = useState(false);
+
+  const onChangeUsername = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+  } 
+
+  const onChangePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+  }
 
   return(
     <div className = "login-container">
       <div className = "login-input-form">
         <Input 
           placeholder = "username"
-          className = "input-field"
+          value = {username}
+          onChange = {onChangeUsername}
         />
         <Input 
           type = "password" 
           placeholder = "password"
-          className = "input-field"
+          value = {password}
+          onChange = {onChangePassword}
         />
-        <button
-          className = "login-btn"
-        >
-          Login
-        </button>
+        <ButtonWithSpinner
+          label = "Login"
+          disabled = {pendingApiCall}
+          spinnerStatus = {pendingApiCall}
+        />
       </div>
     </div>
   )

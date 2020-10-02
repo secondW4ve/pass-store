@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import './Input.css';
 
@@ -9,13 +9,14 @@ function Input(props) {
       <input
         type = {props.type === undefined ? 'text' : props.type} 
         placeholder = {props.placeholder}
-        type = {props.type}
+        value = {props.value}
+        onChange = {props.onChange}
         className = {props.hasError ? "input-field input-error" : "input-field"}
+        disabled = {props.disabled}
       />
-      {props.hasError && 
-        <span className = "error-label">
-          {props.error}
-        </span>}
+      <span className = "error-label">
+        {props.hasError ? props.error : ''}
+      </span>
     </div>
     
   )

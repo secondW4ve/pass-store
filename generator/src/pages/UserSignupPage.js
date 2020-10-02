@@ -1,10 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function UserSignupPage () {
+import Input from '../components/Input';
+import ButtonWithSpinner from '../components/ButtonWithSpinner';
+import { signup } from '../api/apiCalls';
+import './UserSignupPage.css';
+
+function UserSignupPage (props) {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatedPassword, setRepeatedPassword] = useState('');
+  const [errors, setErrors] = useState({});
+  const [pendingApiCall, setPendingApiCall] = useState(false);
+
+  const onChangeUsername = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+  }
+
+
+  const onChangePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+  }
+
+
+  const onChangeRepeatedPassword = (e) => {
+    const value = e.target.value;
+    setRepeatedPassword(value);
+    const doPasswordsMatch = password === value;
+    const errorsObj = {...errors};
+    errorsObj.repeatedPassword = doPasswordsMatch ? '' : 'Passwords don\'t match';
+    setErrors(errorsObj)
+  }
+
+  const onClickSignup = () => {
+    const user = {
+      username: username,
+      password: password
+    };
+    setPendingApiCall(true);
+    signup(user).then(response => {
+      setPendingApiCall(false);
+      props.history.push('/');
+    }).catch(apiError => {
+      let errorsObj = {...errors};
+      if (apiError.response.data && apiError.response.data.validationErrors){
+        errorsObj = {...apiError.response.data.validationErrors};
+      }
+      setErrors(errorsObj);
+      setPendingApiCall(false);
+    })
+  }
 
   return(
-    <div>
-      
+    <div className = "signup-container">
+      <div className = "signup-form">
+        <Input
+          placeholder = "username"
+          value = {username}
+          onChange = {onChangeUsername}
+          hasError = {errors.username && true}
+          error = {errors.username}
+          disabled = {pendingApiCall}
+        />
+        <Input
+          placeholder = "password"
+          value = {password}
+          type = "password"
+          onChange = {onChangePassword}
+          hasError = {errors.password && true}
+          error = {errors.password}
+          disabled = {pendingApiCall}
+        />
+        <Input
+          placeholder = "repeat password"
+          value = {repeatedPassword}
+          type = "password"
+          onChange = {onChangeRepeatedPassword}
+          hasError = {errors.repeatedPassword && true}
+          error = {errors.repeatedPassword}
+          disabled = {pendingApiCall}
+        />
+        <ButtonWithSpinner
+          label = "Sign up"
+          onClick = {onClickSignup}
+          disabled = {pendingApiCall}
+          spinnerStatus = {pendingApiCall}
+        />
+      </div>
     </div>
   )
 }

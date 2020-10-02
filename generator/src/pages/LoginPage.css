@@ -6,7 +6,7 @@
 .login-input-form {
   margin: auto;
   width: 500px;
-  height: 200px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

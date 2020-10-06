@@ -26,7 +26,8 @@ public class User implements UserDetails {
     @NotNull
     @Size(min=8, message = "Password should contain at least 8 characters")
     //Example: P4ssword
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{waver.constraints.password.Pattern.message}")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Password should contain at least 8 characters, " +
+            "at least one big letter and one special character or number")
     private String password;
 
     @OneToMany

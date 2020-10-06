@@ -20,6 +20,16 @@ function LoginPage () {
     setPassword(value);
   }
 
+  const onClickLogin = () => {
+    const body = {
+      username: username,
+      password: password,
+    };
+
+    setPendingApiCall(true);
+    
+  }
+
   return(
     <div className = "login-container">
       <div className = "login-input-form">
@@ -38,6 +48,7 @@ function LoginPage () {
           label = "Login"
           disabled = {pendingApiCall}
           spinnerStatus = {pendingApiCall}
+          onClick = {onClickLogin}
         />
       </div>
     </div>

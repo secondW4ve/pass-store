@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import Input from '../components/Input';
 import ButtonWithSpinner from '../components/ButtonWithSpinner';
-import { signup } from '../api/apiCalls';
+import * as authAction from '../redux/authActions';
 import './UserSignupPage.css';
 
 function UserSignupPage (props) {
@@ -13,7 +14,7 @@ function UserSignupPage (props) {
   const [errors, setErrors] = useState({});
   const [pendingApiCall, setPendingApiCall] = useState(false);
 
-  const onChangeUsername = (e) => {
+  const onChangeUsername = (e) => { 
     const value = e.target.value;
     setUsername(value);
   }
@@ -40,7 +41,7 @@ function UserSignupPage (props) {
       password: password
     };
     setPendingApiCall(true);
-    signup(user).then(response => {
+    props.actions.postSignup(user).then(response => {
       setPendingApiCall(false);
       props.history.push('/');
     }).catch(apiError => {
@@ -93,4 +94,12 @@ function UserSignupPage (props) {
   )
 }
 
-export default UserSignupPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: {
+      postSignup: (user) => dispatch(authAction.signupHandler(user)),
+    }
+  }
+};
+
+export default connect(null, mapDispatchToProps)(UserSignupPage);

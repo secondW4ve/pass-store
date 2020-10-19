@@ -19,15 +19,14 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min=4, message = "Username should contain at least 4 characters")
+    @NotNull(message = "{storage.constraints.username.NotNull.message}")
+    @Size(min=4, max = 255)
     private String username;
 
     @NotNull
-    @Size(min=8, message = "Password should contain at least 8 characters")
+    @Size(min=8, max = 255)
     //Example: P4ssword
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Password should contain at least 8 characters, " +
-            "at least one big letter and one special character or number")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{storage.constraints.password.Pattern.message}")
     private String password;
 
     @OneToMany
@@ -80,5 +79,13 @@ public class User implements UserDetails {
 
     public void setPasswords(List<Password> passwords) {
         this.passwords = passwords;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

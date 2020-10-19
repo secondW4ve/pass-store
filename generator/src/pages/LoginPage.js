@@ -27,7 +27,6 @@ function LoginPage () {
     };
 
     setPendingApiCall(true);
-    
   }
 
   return(

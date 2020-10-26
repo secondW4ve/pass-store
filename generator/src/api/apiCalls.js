@@ -5,6 +5,7 @@ export const signup = (user) => {
 }
 
 export const login = (user) => {
+  console.log(btoa(user.username + ':' + user.password));
   return axios.post('/api/1.0/login', {}, {auth: user});
 }
 

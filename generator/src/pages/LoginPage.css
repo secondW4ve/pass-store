@@ -25,3 +25,9 @@
   background: #060708;
   cursor: pointer;
 }
+
+.common-error {
+  color: #d60700;
+  margin: .5rem 0 2rem 0;
+  font-family: "Raleway Light";
+}

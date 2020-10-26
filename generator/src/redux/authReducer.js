@@ -7,6 +7,15 @@ const initialState = {
 
 export default function authReducer(state = initialState, action){
   
-  
-  return state;
+  switch (action.type){
+    case 'login-success':
+        return {
+            ...action.payload,
+            isLoggedIn: true,
+        }
+    case 'logout-success':
+        return {...initialState};  
+    default:
+        return state;
+  }
 }

@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import UserSignupPage from './pages/UserSignupPage';
 import GeneratorPage from './pages/GeneratorPage';
 import TopBar from './components/TopBar';
+import UserPage from './pages/UserPage';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path = "/login" component = {LoginPage}></Route>
           <Route path = "/signup" component = {UserSignupPage}></Route>
 				  <Route path = "/generator" component = {GeneratorPage}></Route>
+          <Route path = "/user" component = {UserPage}></Route>
         </Switch>
       </div>
     </div>

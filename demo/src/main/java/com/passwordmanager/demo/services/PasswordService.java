@@ -19,7 +19,5 @@ public class PasswordService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Page<Password> getAllRecord(Pageable pageable){
-        return passwordRepository.findAll(pageable);
-    }
+
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Input from '../components/Input';
@@ -15,24 +15,37 @@ function UserSignupPage (props) {
   const [pendingApiCall, setPendingApiCall] = useState(false);
 
   const onChangeUsername = (e) => { 
+    if(errors.username !== ''){
+      const errorsObj = {...errors};
+      errorsObj.username = '';
+      setErrors(errorsObj)
+    }
     const value = e.target.value;
     setUsername(value);
   }
 
-
   const onChangePassword = (e) => {
+    if(errors.password !== ''){
+      const errorsObj = {...errors};
+      errorsObj.password = '';
+      setErrors(errorsObj)
+    }
+    comparePasswords();
     const value = e.target.value;
     setPassword(value);
   }
 
-
   const onChangeRepeatedPassword = (e) => {
     const value = e.target.value;
     setRepeatedPassword(value);
+    comparePasswords(value);
+  }
+
+  const comparePasswords = (value = repeatedPassword) => {
     const doPasswordsMatch = password === value;
     const errorsObj = {...errors};
-    errorsObj.repeatedPassword = doPasswordsMatch ? '' : 'Passwords don\'t match';
-    setErrors(errorsObj)
+    errorsObj.repeatedPassword = doPasswordsMatch ? '' : `Passwords don't match`;
+    setErrors(errorsObj);
   }
 
   const onClickSignup = () => {
@@ -43,7 +56,7 @@ function UserSignupPage (props) {
     setPendingApiCall(true);
     props.actions.postSignup(user).then(response => {
       setPendingApiCall(false);
-      props.history.push('/');
+      props.history.push('/user');
     }).catch(apiError => {
       let errorsObj = {...errors};
       if (apiError.response.data && apiError.response.data.validationErrors){

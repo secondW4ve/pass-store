@@ -1,6 +1,7 @@
 package com.passwordmanager.demo.shared;
 
 import com.passwordmanager.demo.error.ApiError;
+import com.passwordmanager.demo.exceptions.CustomNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -22,6 +23,15 @@ public class ExceptionHandlerAdvice {
         ApiError apiError = new ApiError(400, "Validation Error", request.getServletPath());
         Map<String, String> validationErrors = getValidationErrorsFrom(exception);
         apiError.setValidationErrors(validationErrors);
+        return apiError;
+    }
+
+    @ExceptionHandler({CustomNotFoundException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    ApiError handleWrongCredentials(CustomNotFoundException exception, HttpServletRequest request){
+        System.out.println("here");
+        ApiError apiError = new ApiError(401, "Authorization error", request.getServletPath());
+        apiError.setMessage(exception.getErrorMessage());
         return apiError;
     }
 

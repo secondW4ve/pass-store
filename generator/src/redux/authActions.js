@@ -3,6 +3,7 @@ import * as apiCalls from '../api/apiCalls';
 export const loginHandler = (credentials) => {
     return function(dispatch){
         return apiCalls.login(credentials).then((response) => {
+            console.log(credentials);
             dispatch(
                 loginSuccess({
                     ...response.data,

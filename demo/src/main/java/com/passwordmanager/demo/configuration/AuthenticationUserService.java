@@ -2,6 +2,7 @@ package com.passwordmanager.demo.configuration;
 
 import com.passwordmanager.demo.entities.user.User;
 import com.passwordmanager.demo.entities.user.UserRepository;
+import com.passwordmanager.demo.exceptions.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,7 @@ public class AuthenticationUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(s);
         if (user == null){
-            throw new UsernameNotFoundException("User not found");
+            throw new CustomNotFoundException("User with this username not found");
         }
         return user;
     }

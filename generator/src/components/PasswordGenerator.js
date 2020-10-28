@@ -61,7 +61,8 @@ function PasswordGenerator (props) {
       <div className = "password-display" onClick = {copyPasswordToClipboard}>
           <p className = {passwordClass}>{generatedPassword}</p>
       </div>
-      <Animated 
+      <div className = "animated-container">
+        <Animated 
           animationIn="zoomIn" 
           animationOut="zoomOut" 
           animationInDuration={600} 
@@ -72,6 +73,7 @@ function PasswordGenerator (props) {
         >
           Password was copied!
         </Animated>
+      </div>
       <div className = "form">
         <p>Number of characters</p>
         <div className = "character-amount-container">

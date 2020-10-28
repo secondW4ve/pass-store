@@ -6,7 +6,7 @@
 .login-input-form {
   margin: auto;
   width: 500px;
-  height: 250px;
+  height: 275px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,8 +26,20 @@
   cursor: pointer;
 }
 
-.common-error {
+.server-error-container{
+  min-height: 30px;
+  margin-bottom: 1rem;
+  min-width: 300px;
+}
+
+.server-error {
+  min-height: 30px;
   color: #d60700;
-  margin: .5rem 0 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Raleway Light";
+  border-radius: 25px;
+  border: .5px solid;
+  background-color: #fa7d7d;
 }

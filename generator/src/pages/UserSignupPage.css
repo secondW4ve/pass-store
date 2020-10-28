@@ -6,7 +6,7 @@
 .signup-form {
   margin: auto;
   width: 500px;
-  height: 300px;
+  height: 325px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

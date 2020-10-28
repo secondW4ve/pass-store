@@ -20,7 +20,6 @@ public class UserController {
 
     @PostMapping(path = "/users", consumes = "application/json")
     GenericResponse createUser(@Valid @RequestBody User user){
-        System.out.println(user.getUsername());
         boolean userSaved = userService.save(user);
         if (!userSaved){
             return new GenericResponse("User with this username already exist");

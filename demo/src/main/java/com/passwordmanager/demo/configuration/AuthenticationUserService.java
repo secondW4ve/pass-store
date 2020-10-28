@@ -19,6 +19,7 @@ public class AuthenticationUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(s);
         if (user == null){
+            
             throw new CustomNotFoundException("User with this username not found");
         }
         return user;

@@ -14,6 +14,13 @@ function UserSignupPage (props) {
   const [errors, setErrors] = useState({});
   const [pendingApiCall, setPendingApiCall] = useState(false);
 
+  useEffect(() => {
+    const doPasswordsMatch = password === repeatedPassword;
+    const errorsObj = {...errors};
+    errorsObj.repeatedPassword = doPasswordsMatch ? '' : `Passwords don't match`;
+    setErrors(errorsObj);
+  },[password, repeatedPassword]);
+
   const onChangeUsername = (e) => { 
     if(errors.username !== ''){
       const errorsObj = {...errors};
@@ -30,7 +37,6 @@ function UserSignupPage (props) {
       errorsObj.password = '';
       setErrors(errorsObj)
     }
-    comparePasswords();
     const value = e.target.value;
     setPassword(value);
   }
@@ -38,16 +44,7 @@ function UserSignupPage (props) {
   const onChangeRepeatedPassword = (e) => {
     const value = e.target.value;
     setRepeatedPassword(value);
-    comparePasswords(value);
   }
-
-  const comparePasswords = (value = repeatedPassword) => {
-    const doPasswordsMatch = password === value;
-    const errorsObj = {...errors};
-    errorsObj.repeatedPassword = doPasswordsMatch ? '' : `Passwords don't match`;
-    setErrors(errorsObj);
-  }
-
   const onClickSignup = () => {
     const user = {
       username: username,
@@ -99,7 +96,7 @@ function UserSignupPage (props) {
         <ButtonWithSpinner
           label = "Sign up"
           onClick = {onClickSignup}
-          disabled = {pendingApiCall}
+          disabled = {pendingApiCall || errors.repeatedPassword !== ''}
           spinnerStatus = {pendingApiCall}
         />
       </div>

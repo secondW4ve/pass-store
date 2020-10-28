@@ -5,7 +5,6 @@ import './ButtonWithSpinner.css'
 
 function ButtonWithSpinner(props) {
 
-
   return (
     <div className = "button-with-spinner-container">
       <button 

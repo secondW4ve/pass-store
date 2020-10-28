@@ -90,6 +90,16 @@ function LoginPage (props) {
           error = {errorPassword}
           disabled = {pendingApiCall}
         />
+        <div className = "server-error-container">
+          {error !== undefined ? 
+            <span className = "server-error">
+              {error}
+            </span>
+            : 
+            ''
+          }
+        </div>
+        
         <ButtonWithSpinner
           label = "Login"
           disabled = {pendingApiCall}

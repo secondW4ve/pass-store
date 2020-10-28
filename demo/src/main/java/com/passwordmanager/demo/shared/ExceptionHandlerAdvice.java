@@ -26,15 +26,6 @@ public class ExceptionHandlerAdvice {
         return apiError;
     }
 
-    @ExceptionHandler({CustomNotFoundException.class})
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    ApiError handleWrongCredentials(CustomNotFoundException exception, HttpServletRequest request){
-        System.out.println("here");
-        ApiError apiError = new ApiError(401, "Authorization error", request.getServletPath());
-        apiError.setMessage(exception.getErrorMessage());
-        return apiError;
-    }
-
     private Map<String, String> getValidationErrorsFrom(MethodArgumentNotValidException exception) {
         BindingResult result = exception.getBindingResult();
 
